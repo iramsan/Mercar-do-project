@@ -1,0 +1,110 @@
+<%- include('./layouts/main.ejs') -%>
+<%- include('./partials/navigation.ejs') -%>
+
+<div class="container">
+    <div class="d_grid grid_t_c_4">
+        <!-- Form -->
+        <form action="/sell" method="POST" class="m_auto" enctype="multipart/form-data">
+            <div class="pos_stcky">
+                <div class="pos_rel m_t_05">
+                    <label for="" class="label transition" id="title">Titulo</label>
+                    <input type="text" name="Name" class="input_text" id="title_input" onclick="dataStart('title')" onblur="dataRemove('title', this.id)" onkeyup="show(this.id, 'title_s')">
+                </div>
+                <div class="pos_rel m_t_05">
+                    <label for="" class="label transition" id="price">Precio</label>
+                    <input type="text" name="Price" class="input_text" id="price_input" onclick="dataStart('price')" onblur="dataRemove('price', this.id)" onkeyup="show(this.id, 'price_s')">
+                </div>
+                <div class="pos_rel m_t_05">
+                    <label for="" class="label transition" id="description">Descripción</label>
+                    <textarea name="Description" id="text" cols="1" rows="6" class="input_text max_h_100" onclick="dataStart('description')" onblur="dataRemove('description', this.id)" onkeyup="show(this.id, 'description_s')"></textarea>
+                </div>
+                <!-- Category -->
+                <div class="">
+                    <select name="fk_category" id="selected" class="input_text" onclick="select(this.id, 'category_s')">
+                        <option value="" selected disabled>Categoria</option>
+                        <option value="1">Telefono</option>
+                        <option value="2">Computadora</option>
+                        <option value="3">Audifono</option>
+                        <option value="4">Tv</option>
+                        <option value="5">Bocina</option>
+                    </select>
+                </div>
+                <!-- Image -->
+                <div class="pos_rel m_t_05 d_flex a_items_c">
+                    <label for="upFile" class="input_file cursor">Seleccionar imagen</label>
+                    <input type="file" name="Img" id="upFile" class="inactive">
+                    <span id="urlFile" class="scrool_only_x url_file_x">Vacio</span>
+                </div>
+                <button type="submit" class="input_text m_t_1 bg_color_g color_w font_w_bold font_size_25 border_none cursor">Vender</button>
+            </div>    
+        </form>
+
+        <!-- Show Settings -->
+        <div class="">
+            <p id="u"></p>
+            <img src="" alt="" id="img_s" class="img_article_1">
+            <p class="input_text inactive" id="url_show">Url img</p>
+
+            <h1 class="" id="title_s">Titulo</h1>
+            <span class="color_g font_w_bold">$</span>
+            <span class="color_g font_w_bold" id="price_s">Precio</span>
+            <p class="" id="description_s">Descripción</p>
+            <p class="" id="category_s">Categoria</p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function dataStart(param) {
+        const id = document.getElementById(param);
+        id.classList.add('label_active');
+    }
+    function dataRemove(id, thisID) {
+        const id_ = document.getElementById(id);
+        const thisID_ = document.getElementById(thisID);
+
+        if (thisID_.value.length == 0) {
+            id_.classList.remove('label_active');
+        }
+    }
+
+    // input image
+    const upFile = document.getElementById('upFile');
+    const urlFile = document.getElementById('urlFile');
+
+    const url_show = document.getElementById('url_show');
+
+    upFile.addEventListener('change', () => {
+        const data = document.querySelector('input[type=file]').files[0];
+        urlFile.innerText = '✓';
+        urlFile.classList.add('url_file_up');
+        urlFile.classList.remove('url_file_x');
+        url_show.innerText = data.name;
+
+
+        const ob = URL.createObjectURL(data);
+        const img_s = document.getElementById('img_s');
+        img_s.src = ob;
+    });
+
+
+    // Show data
+    function show(paramID, paramID_show) {
+        const input_id = document.getElementById(paramID);
+        const id_show = document.getElementById(paramID_show);
+        id_show.innerText = input_id.value;
+    }
+
+    function select(id_1, id_2) {
+        const push = document.getElementById(id_2);
+
+        const inp_select = document.getElementById(id_1);
+        const select = inp_select.options[inp_select.selectedIndex].text;
+
+        push.innerText = select;
+    }
+
+</script>
+
+<%- include('./partials/footer.ejs') -%>

@@ -1,0 +1,34 @@
+<%- include('./layouts/main.ejs') -%>
+<%- include('./partials/navigation.ejs') -%>
+<%- include('./partials/searcher.ejs') -%>
+<div class="container">
+    <div>
+    <!-- Show articles -->
+    <div class="d_grid grid_t_c_2 p_1 gap_1">
+
+        <% for (const i of article) { %>
+        <a href="/store<%= i['View'] + '/' + i['ID_article'] %> " class="text_d_n color_n m_b_1">
+            <div class="card_model_2 m_auto text_a_s p_1">
+                <div class="m_auto">
+                    <img src="uploads/<%= i['Img'] %>" alt="Image not found" class="img_article_1">
+                </div>
+                <div class="">
+                    <% if (i['Discount'] != 0) { %>
+                        <br>
+                        <span class="discount text_a_c"> <%= i['Discount'] %>%
+                        <span class="m_l_05 color_w font_w_bold">Oferta</span>
+                        </span>
+                        <% } %>
+                    <p class="font_w_bold m_0 m_t_1"> <%= i['Name']%> </p>
+                    <p class="color_g font_w_bold m_0"> $<%= i['Price'] %> </p>
+                </div>
+            </div>
+        </a>
+        <% } %>
+
+    </div>
+    </div>
+</div>
+
+<script defer src="/js/searcher.js"></script>
+<%- include('./partials/footer.ejs') -%>

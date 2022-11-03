@@ -1,0 +1,10 @@
+<%- include('./layouts/main.ejs') -%>
+<%- include('./partials/navigation.ejs') -%>
+
+    <% if (value == 'login') { %>
+        <%- include('./partials/login.ejs') -%>
+    <% } else { %>
+        <%- include('./partials/newacount.ejs') -%>
+    <% } %>
+
+<%- include('./partials/footer.ejs') -%>

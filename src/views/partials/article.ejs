@@ -1,0 +1,22 @@
+<%- include('../layouts/main.ejs') -%>
+<%- include('./navigation.ejs') -%>
+
+<div class="container">
+    <div class="d_grid grid_t_c_4 max_w_800 m_auto">
+        <img src="/uploads/<%=art.Img%>" alt="..." class="img_Cat m_auto pos_stcky">
+        <div class="">
+            <h1 class="font_w_n"> <%= art.Name %> </h1>
+            <p class="color_g font_size_25 font_w_bold"> $ <%= art.Price %> </p>
+
+            <div class="d_flex flex_d_c">
+                <label for=""> Cantidad </label>
+                <input type="number" value="1" min="1" max="9" class="input_number">
+                <button class="m_t_1 bg_color_g bttn"> Añadir al carrito </button>
+                <p> <%= art.Description %> </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%- include('./footer.ejs') -%>
