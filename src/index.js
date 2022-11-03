@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+console.log('hola');
 // Middleware
 app.use(multer({storage}).single('Img'));
 
