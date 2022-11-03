@@ -1,9 +1,9 @@
 module.exports = {
     database: {
-        host: 'us-cdbr-east-06.cleardb.net',
-        database: 'heroku_6b762f89baca005',
-        user: 'be1ec0d80fc866',
-        password: '43f54c6d',
+        host: 'containers-us-west-93.railway.app',
+        database: 'railway',
+        user: 'root',
+        password: '5i6cklhAZA1RLBIL0T6j',
     },
 
     databaseLocal: {
