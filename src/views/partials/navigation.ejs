@@ -8,13 +8,40 @@
         <div class="d_flex gap_1 d_none_desk">
             <a href="/sell" class="text_d_n color_n">Vender</a>
             <a href="/store" class="text_d_n color_n">Tienda</a>
-            <div class="gap_1">
+            <div class="">
                 <!-- <a href="/registration" class="text_d_n color_g font_w_bold session transition">Iniciar Sesión</a> -->
-                <a href="/register/login" class="text_d_n register transition">Registrarte</a>
+                <% if (!user) { %>
+                    <a href="/register/login" class="text_d_n register transition">Registrarte</a>
+                <% } %>
             </div>
+            <!-- User Session -->
+            <% if (user) { %>
+            <div class="pos_rel">
+                <span class="userLogo" id="open_Settings"><%= user.Name[0].toUpperCase() %></span>
+                <div class="z_index inactive pos_abs userSettings d_flex j_c_c flex_d_c" id="Box_User_Settings">
+                    <span class="p_8_16 font_size_14">Registrado como <%= user.Name %> </span>
+                    <div class="border_top p_8_16"></div>
+                    <a href="" class="hoverbtn text_d_n color_w p_8_16 font_size_14">Mis ventas</a>
+                    <a href="/logout" class="hoverbtn text_d_n color_w p_8_16 font_size_14">Desconectar</a>
+                    <div class="border_top p_8_16"></div>
+                </div>
+            </div>
+            <% } %>
         </div>
-
-        
-
     </div>
 </nav>
+
+<script>
+    const open = document.getElementById('open_Settings');
+    open.addEventListener('click', () => {
+        document.getElementById('Box_User_Settings').classList.toggle('inactive');
+    });
+
+    const body = document.getElementById('body');
+    body.addEventListener('click', (e) => {
+        if (!e.target.matches('#open_Settings')) {
+            document.getElementById('Box_User_Settings').classList.add('inactive');
+        }
+    });
+
+</script>

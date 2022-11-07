@@ -1,0 +1,16 @@
+<!-- Error Message -->
+<% if (message_error) { %>
+    <div class="container">
+        <div class="d_flex j_c_c m_auto message_error">
+            <%= message_error %>
+        </div>
+    </div>
+<% } %>
+
+<% if (message_success) { %>
+    <div class="container">
+        <div class="d_flex j_c_c m_auto message_success">
+            <%= message_success%> <%= user.Name %>
+        </div>
+    </div>
+<% } %>

@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const multer = require('multer');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 // Initializations
 const app = express();
@@ -15,12 +17,28 @@ const storage = multer.diskStorage({
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-console.log('hola');
+
 // Middleware
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(flash());
+
+
 app.use(multer({storage}).single('Img'));
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+
+// Global variables
+app.use((req, res, next) => {
+    app.locals.user = req.session.user;
+    app.locals.message_error = req.flash('message_error')[0];
+    app.locals.message_success = req.flash('message_success')[0];
+    next();
+});
 
 // Routes
 app.use(require('./routes/links'));
