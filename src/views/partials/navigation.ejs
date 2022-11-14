@@ -1,13 +1,23 @@
 <nav class="">
-    <div class="d_flex j_c_sb container mar_auto">
+    <div class="d_flex j_c_sb container mar_auto a_items_c">
+        <!-- Logo -->
         <a href="/" class="d_flex a_items_c text_d_n color_n">
             <span class="font_size_25">Mercar-Do</span>
             <img src="/img/logo.png" alt="">
         </a>
-        <img src="/img/iconMenu.png" alt="sss" class="d_none_adr">
-        <div class="d_flex gap_1 d_none_desk">
-            <a href="/sell" class="text_d_n color_n">Vender</a>
-            <a href="/store" class="text_d_n color_n">Tienda</a>
+
+        <div class="d_flex gap_1 j_c_c a_items_c">
+            <!-- NavBar desktop -->
+            <div class="d_flex gap_1 d_none_desk">
+                <a href="/sell" class="text_d_n color_n">Vender</a>
+                <a href="/store" class="text_d_n color_n">Tienda</a>
+            </div>
+            <!-- Shopping bag -->
+            <span class="pos_rel cursor" id="shopping-car">
+                <img src="/img/iconShop.png" alt="sss" class="icon">
+                <span class="num" id="mount">0</span>
+            </span>
+            <!-- Register -->
             <div class="">
                 <!-- <a href="/registration" class="text_d_n color_g font_w_bold session transition">Iniciar Sesión</a> -->
                 <% if (!user) { %>
@@ -16,32 +26,49 @@
             </div>
             <!-- User Session -->
             <% if (user) { %>
-            <div class="pos_rel">
-                <span class="userLogo" id="open_Settings"><%= user.Name[0].toUpperCase() %></span>
-                <div class="z_index inactive pos_abs userSettings d_flex j_c_c flex_d_c" id="Box_User_Settings">
-                    <span class="p_8_16 font_size_14">Registrado como <%= user.Name %> </span>
-                    <div class="border_top p_8_16"></div>
-                    <a href="" class="hoverbtn text_d_n color_w p_8_16 font_size_14">Mis ventas</a>
-                    <a href="/logout" class="hoverbtn text_d_n color_w p_8_16 font_size_14">Desconectar</a>
-                    <div class="border_top p_8_16"></div>
+                <div class="pos_rel">
+                    <span class="userLogo" id="open_Settings"><%= user.Name[0].toUpperCase() %></span>
+                    <div class="z_index inactive pos_abs userSettings d_flex j_c_c flex_d_c" id="Box_User_Settings">
+                        <span class="p_8_16 font_size_14">Registrado como <%= user.Name %> </span>
+                        <div class="border_top p_8_16"></div>
+                        <a href="/sales" class="hoverbtn text_d_n color_w p_8_16 font_size_14">Mis ventas</a>
+                        <a href="/logout" class="hoverbtn text_d_n color_w p_8_16 font_size_14">Desconectar</a>
+                        <div class="border_top p_8_16"></div>
+                    </div>
                 </div>
-            </div>
             <% } %>
         </div>
+
+        <!-- Banner movil -->
+        <div class="banner_bottom d_none_adr">
+            <div class="p_8_4 d_flex j_c_sa">
+                <a href="/" class="d_flex flex_d_c a_items_c text_d_n color_w">
+                    <img src="/img/iconHome.png" alt="" class="icon">
+                    <span>Home</span>
+                </a>
+                <a href="/sell" class="d_flex flex_d_c a_items_c text_d_n color_w">
+                    <img src="/img/iconDollar.png" alt="" class="icon">
+                    <span>Vender</span>
+                </a>
+                <a href="/store" class="d_flex flex_d_c a_items_c text_d_n color_w">
+                    <img src="/img/iconStore.png" alt="" class="icon">
+                    <span>Tienda</span>
+                </a>
+            </div>
+        </div>
+
     </div>
 </nav>
 
-<script>
-    const open = document.getElementById('open_Settings');
-    open.addEventListener('click', () => {
-        document.getElementById('Box_User_Settings').classList.toggle('inactive');
-    });
+<!-- Articles views shopping-car -->
+<div class="container view_shopping_car d_flex flex_d_c inactive" id="show-shoppin">
+    <h2 class="font_w_n">Carrito de compras</h2>
+    <div class="d_flex flex_d_c scrool">
+        <table class="scrool" id="row"></table>
+    </div>
+    <button type="reset" id="deleteCar" class="delete_art p_t_1 cursor">Borrar todo</button>
+    <img src="/img/iconClose.png" alt="" id="close" class="close icon cursor transition">
+</div>
 
-    const body = document.getElementById('body');
-    body.addEventListener('click', (e) => {
-        if (!e.target.matches('#open_Settings')) {
-            document.getElementById('Box_User_Settings').classList.add('inactive');
-        }
-    });
-
-</script>
+<script defer src="/js/navigation.js"></script>
+<script defer src="/js/addToCar.js"></script>

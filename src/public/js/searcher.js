@@ -2,7 +2,7 @@ const show_srch = document.getElementById('show_srch');
 const srch = document.getElementById('srch');
 
 document.addEventListener('keyup', (e) => {
-    const id = e.target.matches('#srch')
+    const id = e.target.matches('#srch');
     const value = e.target.value;
     var list = document.querySelectorAll('.index');
     
@@ -29,8 +29,8 @@ document.addEventListener('keyup', (e) => {
     }
 });
 
-srch.addEventListener('blur', () => {
-    show_srch.classList.add('inactive');
-});
+// srch.addEventListener('blur', () => {
+//     show_srch.classList.add('inactive');
+// });
 
 

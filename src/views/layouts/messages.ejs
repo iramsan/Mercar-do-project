@@ -10,7 +10,15 @@
 <% if (message_success) { %>
     <div class="container">
         <div class="d_flex j_c_c m_auto message_success">
-            <%= message_success%> <%= user.Name %>
+            <%= message_success %>
+        </div>
+    </div>
+<% } %>
+
+<% if (message_welcome) { %>
+    <div class="container">
+        <div class="d_flex j_c_c m_auto message_success">
+            <%= message_welcome %> <%= user.Name %>
         </div>
     </div>
 <% } %>

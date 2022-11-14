@@ -26,7 +26,6 @@ app.use(session({
 }));
 app.use(flash());
 
-
 app.use(multer({storage}).single('Img'));
 
 app.use(express.urlencoded({extended: false}));
@@ -37,6 +36,7 @@ app.use((req, res, next) => {
     app.locals.user = req.session.user;
     app.locals.message_error = req.flash('message_error')[0];
     app.locals.message_success = req.flash('message_success')[0];
+    app.locals.message_welcome = req.flash('message_welcome')[0];
     next();
 });
 

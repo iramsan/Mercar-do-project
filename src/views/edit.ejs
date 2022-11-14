@@ -2,21 +2,21 @@
 <%- include('./partials/navigation.ejs') -%>
 <%- include('./layouts/messages.ejs') -%>
 <div class="container">
-    <div class="d_grid grid_t_c_3">
+    <div class="d_grid grid_t_c_4">
         <!-- Form -->
-        <form action="/sell" method="POST" class="m_auto" enctype="multipart/form-data">
+        <form action="/sales/edit/<%= articleEdit.ID_article %>" method="POST" class="m_auto" enctype="multipart/form-data">
             <div class="pos_stcky">
                 <div class="pos_rel m_t_05">
-                    <label for="" class="label transition" id="title">Titulo</label>
-                    <input type="text" name="Name" class="input_text" id="title_input" onclick="dataStart('title')" onblur="dataRemove('title', this.id)" onkeyup="show(this.id, 'title_s')">
+                    <!-- <label for="" class="label transition" id="title">Titulo</label> -->
+                    <input type="text" value="<%= articleEdit.NameArt %>" placeholder="Titulo" name="Name" class="input_text" id="title_input" onclick="dataStart('title')" onblur="dataRemove('title', this.id)" onkeyup="show(this.id, 'title_s')">
                 </div>
                 <div class="pos_rel m_t_05">
-                    <label for="" class="label transition" id="price">Precio</label>
-                    <input type="number" min="0" name="Price" class="input_text" id="price_input" onclick="dataStart('price')" onblur="dataRemove('price', this.id)" onkeyup="show(this.id, 'price_s')">
+                    <!-- <label for="" class="label transition" id="price">Precio</label> -->
+                    <input type="number" value="<%= articleEdit.Price %>" placeholder="Precio" min="0" name="Price" class="input_text" id="price_input" onclick="dataStart('price')" onblur="dataRemove('price', this.id)" onkeyup="show(this.id, 'price_s')">
                 </div>
                 <div class="pos_rel m_t_05">
-                    <label for="" class="label transition" id="description">Descripción</label>
-                    <textarea name="Description" id="text" cols="1" rows="6" class="input_text max_h_100 scrool_y" onclick="dataStart('description')" onblur="dataRemove('description', this.id)" onkeyup="show(this.id, 'description_s')"></textarea>
+                    <!-- <label for="" class="label transition" id="description">Descripción</label> -->
+                    <textarea name="Description" placeholder="Descripción" id="text" cols="1" rows="6" class="input_text max_h_100 scrool_y" onclick="dataStart('description')" onblur="dataRemove('description', this.id)" onkeyup="show(this.id, 'description_s')"><%= articleEdit.Description %></textarea>
                 </div>
                 <!-- Discount -->
                 <div class="d_flex flex_d_c">
@@ -42,28 +42,35 @@
                     <input type="file" name="Img" id="upFile" class="inactive">
                     <span id="urlFile" class="scrool_only_x url_file_x">Vacio</span>
                 </div>
-                <button type="submit" class="input_text m_t_1 bg_color_g color_w font_w_bold font_size_25 border_none cursor">Vender</button>
+                <div class="d_flex flex_d_c">
+                    <button type="submit" class="input_text m_t_1 bg_color_g color_w font_w_bold font_size_25 border_none cursor">Guardar cambios</button>
+                    <a href="/sales" class="input_text m_t_1 bg_color_r color_w font_w_bold font_size_25 border_none cursor text_d_n text_a_c_1">Cancelar</a>
+                </div>    
             </div>    
         </form>
 
-        <!-- Show Settings -->
-        <div class="d_flex flex_d_c">
-            <h1 class="m_auto">Vista de tu articulo</h1>
-            <img src="/img/imgAdd.png" alt="" id="img_s" class="img_article_1 m_auto">
+        <!-- Views Settings -->
+        <div class="">
+            <p id="u"></p>
+            <img src="/uploads/<%= articleEdit.Img %>" alt="" id="img_s" class="img_article_1">
             <p class="input_text inactive" id="url_show">Url img</p>
 
-            <div id="Discount_view" class="inactive d_flex m_auto">
-                <span class="discount text_a_c" id="disAdd">0%</span>
+            <div id="Discount_view" class="inactive d_flex">
+                <span class="discount text_a_c" id="disAdd"><%= articleEdit.Discount %>%</span>
                 <span class="discount font_w_bold">Oferta</span>
             </div>
 
-            <h1 class="text_a_c" id="title_s">Titulo</h1>
-            <div class="text_a_c">
-                <span class="color_g font_w_bold">$</span>
-                <span class="color_g font_size_25" id="price_s">Precio</span>
+            <h1 class="" id="title_s"><%= articleEdit.NameArt %></h1>
+            <span class="color_g font_w_bold">$</span>
+            <span class="color_g font_w_bold" id="price_s"><%= articleEdit.Price %></span>
+            
+            <div>
+                <span>Categoria: </span>
+                <span id="category_s"><%= articleEdit.NameCat %></span>
             </div>
-            <p class="description_view" id="description_s">Descripción</p>
-            <!-- <p class="" id="category_s">Categoria</p> -->
+
+            <p>Descripción:</p>
+            <p class="" id="description_s"><%= articleEdit.Description %></p>
         </div>
 
     </div>
@@ -126,16 +133,12 @@
             document.getElementById('putDiscount').classList.toggle('inactive');
             document.getElementById('Discount_view').classList.toggle('inactive');
             document.getElementById('putDiscount').value = 0;
-            document.getElementById('disAdd').innerText = '0%';
+            // document.getElementById('disAdd').innerText = '0%';
         });
 
     document.getElementById('putDiscount').addEventListener('click', () => {
         document.getElementById('disAdd').innerText = document.getElementById('putDiscount').value + '%';
     });
-
-
-    
-
 </script>
 
 <%- include('./partials/footer.ejs') -%>

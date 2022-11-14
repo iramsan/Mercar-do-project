@@ -1,12 +1,9 @@
 const express = require('express');
+const pool = require('../database');
 const route = express.Router();
 
 route.get('/', (req, res) => {
     res.render('home');
-});
-
-route.get('/store', (req, res) => {
-    res.render('store');
 });
 
 route.get('/sell', (req, res) => {
@@ -27,8 +24,12 @@ route.get('/register/login', (req, res) => {
 });
 
 route.get('/register/create-acount', (req, res) => {
-    const value = 'createAcount';
-    res.render('register', {value});
+    if (req.session.user) {
+        res.redirect('/');
+    } else {
+        const value = 'createAcount';
+        res.render('register', {value});
+    }
 });
 
 route.get('/profile', (req, res) => {
@@ -44,5 +45,6 @@ route.get('/logout', (req, res) => {
     delete req.session.user;
     res.redirect('/register/login');
 });
+
 
 module.exports = route;

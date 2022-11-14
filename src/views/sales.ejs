@@ -1,0 +1,36 @@
+<%- include('./layouts/main.ejs') -%>
+<%- include('./partials/navigation.ejs') -%>
+
+<%- include('./layouts/messages.ejs') -%>
+<div class="container">
+    <div>   
+        <h1 class="font_w_n">Articulos publicados por ti.</h1>
+        <img src="" alt="">
+    </div>
+    <!-- Articles -->
+    <div class="d_grid grid_t_c_2 p_1 gap_1">
+        <% for (const i of sales) { %>
+            <a href="/sales/edit/<%= i['ID_article']%>" class="text_d_n color_n m_b_1 w_270 m_auto pos_rel scale transition">
+                <div class="card_model_2 m_auto text_a_s p_1">
+                    <div class="m_auto">
+                        <img src="uploads/<%= i['Img'] %>" alt="Image not found" class="img_article_1">
+                    </div>
+                    <div class="">
+                        <% if (i['Discount'] != 0) { %>
+                            <div class="pos_abs xy_position">
+                                <span class="discount text_a_c"> <%= i['Discount'] %>%
+                                <span class="m_l_05 color_w font_w_bold">Oferta</span>
+                                </span>
+                            </div>
+                            <% } %>
+                        <p class="font_w_bold m_0 m_t_1"> <%= i['NameArt']%> </p>
+                        <p class="color_g font_w_bold m_0"> $<%= i['Price'] %> </p>
+                        <!-- <p class="m_0">Vendedor: <span><%= i['NameUser'] %></span> </p> -->
+                    </div>
+                </div>
+            </a>
+            <% } %>
+    </div>
+</div>
+
+<%- include('./partials/footer.ejs') -%>

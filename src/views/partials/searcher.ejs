@@ -6,10 +6,10 @@
             <!-- <button class="lens" type="submit"><img class="icon" src="https://img.icons8.com/ios-glyphs/344/search--v1.png" alt=""></button> -->
         </div>
         <!-- Show content -->
-        <div class="pos_abs show_srch inactive" id="show_srch">
+        <div class="pos_abs show_srch inactive z_index" id="show_srch">
             <ul class="ul_l_s_n">
                 <% for (const i of article) { %>
-                <li class="article_srch index"> <a href="" ><%= i['Name'] %></a> </li>
+                <li class="article_srch index"> <a href="/store<%= i['View'] %>/<%= i['ID_article'] %> " class="text_d_n color_n"><%= i['NameArt'] %></a> </li>
                 <% } %>
             </ul>
         </div>
