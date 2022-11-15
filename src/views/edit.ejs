@@ -2,7 +2,7 @@
 <%- include('./partials/navigation.ejs') -%>
 <%- include('./layouts/messages.ejs') -%>
 <div class="container">
-    <div class="d_grid grid_t_c_4">
+    <div class="d_grid grid_t_c_3">
         <!-- Form -->
         <form action="/sales/edit/<%= articleEdit.ID_article %>" method="POST" class="m_auto" enctype="multipart/form-data">
             <div class="pos_stcky">
@@ -50,9 +50,9 @@
         </form>
 
         <!-- Views Settings -->
-        <div class="">
+        <div class="d_flex flex_d_c">
             <p id="u"></p>
-            <img src="/uploads/<%= articleEdit.Img %>" alt="" id="img_s" class="img_article_1">
+            <img src="/uploads/<%= articleEdit.Img %>" alt="" id="img_s" class="img_article_1 m_auto">
             <p class="input_text inactive" id="url_show">Url img</p>
 
             <div id="Discount_view" class="inactive d_flex">
@@ -60,17 +60,12 @@
                 <span class="discount font_w_bold">Oferta</span>
             </div>
 
-            <h1 class="" id="title_s"><%= articleEdit.NameArt %></h1>
-            <span class="color_g font_w_bold">$</span>
-            <span class="color_g font_w_bold" id="price_s"><%= articleEdit.Price %></span>
-            
-            <div>
-                <span>Categoria: </span>
-                <span id="category_s"><%= articleEdit.NameCat %></span>
+            <h1 class="m_auto" id="title_s"><%= articleEdit.NameArt %></h1>
+            <div class="m_auto">
+                <span class="color_g font_w_bold">$</span>
+                <span class="color_g font_w_bold" id="price_s"><%= articleEdit.Price %></span>
             </div>
-
-            <p>Descripción:</p>
-            <p class="" id="description_s"><%= articleEdit.Description %></p>
+            <p class="description_view" id="description_s"><%= articleEdit.Description %></p>
         </div>
 
     </div>
