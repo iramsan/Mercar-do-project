@@ -1,3 +1,4 @@
+const { query } = require('express');
 const express = require('express');
 const route = express.Router();
 const pool = require('../database');
@@ -11,7 +12,7 @@ route.get('/store', async (req, res) => {
 route.get('/store/article/:id', async (req, res) => {
     const { id } = req.params;
     const art = await pool.query('SELECT * FROM article WHERE ID_article = ?', [id]);
-    const all_data = await pool.query('SELECT ID_article, a.Name as "NameArt" , u.Name as "NameUser", Price, Description, Img, View, Discount, fk_category FROM article as a JOIN users as u ON fk_user = ID_user WHERE ID_article = ?', [id]);
+    const all_data = await pool.query('SELECT ID_article, ID_user, a.Name as "NameArt" , u.Name as "NameUser", Price, Description, Img, View, Discount, fk_category FROM article as a JOIN users as u ON fk_user = ID_user WHERE ID_article = ?', [id]);
     res.render('./partials/article', { art: art[0], all_data: all_data[0] });
 });
 
@@ -29,13 +30,13 @@ route.post('/sell', async (req, res) => {
                 const userUpData = {Name, Price, Description, Img, Discount, fk_category, fk_user: user_id};
                 await pool.query('INSERT INTO article SET ?', [userUpData]);
                 req.flash('message_success', 'Articulo publicado con exito');
-                res.redirect('/sales');
+                res.redirect('/profile');
             } else {
                 // Without Discount
                 const userUpData = {Name, Price, Description, Img, fk_category, fk_user: user_id};
                 await pool.query('INSERT INTO article SET ?', [userUpData]);
                 req.flash('message_success', 'Articulo publicado con exito');
-                res.redirect('/sales');
+                res.redirect('/profile');
             }
             
         } else {
@@ -94,16 +95,6 @@ route.post('/register/login', async (req, res) => {
     }
 });
 
-route.get('/sales', async (req, res) => {
-    if (req.session.user) {
-        const id = req.session.user['ID_user'];
-        const sales = await pool.query('SELECT ID_article, a.Name as "NameArt" , u.Name as "NameUser", Price, Description, Img, View, Discount, fk_category FROM article as a JOIN users as u ON fk_user = ID_user WHERE ID_user = ?', [id]);
-        res.render('sales', {sales});
-    } else {
-        res.redirect('/register/login');
-    } 
-});
-
 route.get('/sales/edit/:id', async (req, res) => {
     const { id } = req.params;
     const articleEdit = await pool.query('SELECT ID_article, a.Name as NameArt, Price, Description, Img, View, Discount, fk_user, c.Name as NameCat FROM article as a JOIN categories as c ON ID_categories = fk_category WHERE ID_article = ?', [id]);
@@ -126,7 +117,30 @@ route.post('/sales/edit/:id', async (req, res) => {
         await pool.query('UPDATE article SET ? WHERE ID_article = ?', [update, id]);
     }
     req.flash('message_success', 'Articulo actualizado');
-    res.redirect('/sales');
+    res.redirect('/profile');
+});
+
+route.get('/store/user/:id', async (req, res) =>{
+    const {id} = req.params;
+    const articles_from_user = await pool.query('SELECT ID_article, ID_user, a.Name as "NameArt" , u.Name as "NameUser", Price, Description, Img, View, Discount, fk_category FROM article as a JOIN users as u ON fk_user = ID_user WHERE ID_user = ?', [id]);
+    res.render('trader', {articles_from_user});
+
+});
+
+route.get('/profile', async (req, res) => {
+    if (req.session.user) {
+        const Email = req.session.user.Email;
+        const data_profile = await pool.query('SELECT ID_article, ID_user, a.Name as "NameArt" , u.Name as "NameUser", Price, Description, Img, View, Discount, fk_category FROM users as u JOIN article as a ON fk_user = ID_user WHERE Email = ?', [Email]);
+        res.render('profile', {data_profile});
+    } else {
+        req.flash('message_error', 'Necesitas Iniciar Sesión');
+        res.redirect('/register/login');
+    }
+});
+
+route.post('/store/user/:id', async (req, res) => {
+    await pool.query('');
+    res.redirect('/profile');
 });
 
 module.exports = route;

@@ -1,6 +1,6 @@
 <!-- Error Message -->
 <% if (message_error) { %>
-    <div class="container">
+    <div class="container message_settings" id="message_error">
         <div class="d_flex j_c_c m_auto message_error">
             <%= message_error %>
         </div>
@@ -8,7 +8,7 @@
 <% } %>
 
 <% if (message_success) { %>
-    <div class="container">
+    <div class="container message_settings" id="message_success">
         <div class="d_flex j_c_c m_auto message_success">
             <%= message_success %>
         </div>
@@ -16,9 +16,20 @@
 <% } %>
 
 <% if (message_welcome) { %>
-    <div class="container">
+    <div class="container message_settings" id="message_welcome">
         <div class="d_flex j_c_c m_auto message_success">
             <%= message_welcome %> <%= user.Name %>
         </div>
     </div>
 <% } %>
+
+<script>
+
+    setTimeout(() => {
+        const messages = document.querySelectorAll('.message_settings');
+            for (const i of messages) {
+                i.classList.add('inactive');
+            }
+    }, 4000);
+
+</script>

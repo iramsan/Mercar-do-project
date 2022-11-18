@@ -2,6 +2,75 @@
 <%- include('./partials/navigation.ejs') -%>
 <%- include('./layouts/messages.ejs') -%>
 <div class="container">
-    <h1>Perfil de usuario</h1>
-    <p>Nombre:</p>
+    <div class="d_grid grid_max_300 gap_1">
+        <nav class="">
+            <div class="card_profile d_flex flex_d_c  pos_rel pos_stcky">
+                <div class="pos_abs position_icon_1 d_flex j_c_c a_items_c">
+                    <span class="font_w_bold m_auto ball_icon"> <%= data_profile[0].NameUser[0].toUpperCase() %> </span>
+                </div>
+                <span class="p_2 border_r_top bg_img_1"></span>
+                <div class="d_flex flex_d_c bg_color_b p_t_2">
+                    <span class="text_a_c_1 font_w_bold"> <%= data_profile[0].NameUser %> </span>
+                    <span class="text_a_c_1 m_auto">Vendedor</span>
+                </div>
+                <div class="bg_color_b d_grid grid_3 p_t_2 border_r_b">
+                    <div class="d_flex flex_d_c">
+                        <span class="m_auto font_w_bold font_size_25"><%= data_profile.length %></span>
+                        <span class="m_auto color_c">Ventas</span>
+                    </div>
+                    <div class="d_flex flex_d_c">
+                        <form action="/store/user/:id" method="post" class="">
+                            <button type="submit" class="m_auto d_flex bg_color_n "><img src="/img/iconLike.png" alt="" class="icon m_auto cursor xd" id="like"></button>
+                        </form>
+                        <span class="m_auto color_c">Votar</span>
+                    </div>
+                    <div class="d_flex flex_d_c m_b_2">
+                        <span class="m_auto font_w_bold font_size_25">0</span>
+                        <span class="m_auto color_c">Likes</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div>
+            <h1 class="font_w_n bg_color_b color_w p_1 text_a_c_1 border-r">Articulos publicados</h1>
+            <div class="d_grid grid_t_c_5">
+                <% for (const i of data_profile) { %>
+                    <a href="/sales/edit/<%= i['ID_article']%>" class="text_d_n color_n m_b_1 w_270 m_auto pos_rel scale transition">
+                        <div class="card_model_2 m_auto text_a_s p_1">
+                            <div class="m_auto">
+                                <img src="uploads/<%= i['Img'] %>" alt="Image not found" class="img_article_1">
+                            </div>
+                            <div class="">
+                                <% if (i['Discount'] != 0) { %>
+                                    <div class="pos_abs xy_position">
+                                        <span class="discount text_a_c"> <%= i['Discount'] %>%
+                                        <span class="m_l_05 color_w font_w_bold">Oferta</span>
+                                        </span>
+                                    </div>
+                                    <% } %>
+                                <p class="font_w_bold m_0 m_t_1"> <%= i['NameArt']%> </p>
+                                <p class="color_g font_w_bold m_0"> $<%= i['Price'] %> </p>
+                                <!-- <p class="m_0">Vendedor: <span><%= i['NameUser'] %></span> </p> -->
+                            </div>
+                        </div>
+                    </a>
+                    <% } %>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    
+    const like = document.getElementById('like')
+    like.addEventListener('click', () => {
+        if (like.src == 'http://localhost:3000/img/iconLikeRed.png') {
+            like.src = '/img/iconLike.png';
+        } else {
+            like.src = '/img/iconLikeRed.png';
+        }
+
+    });
+
+
+</script>

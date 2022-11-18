@@ -9,11 +9,11 @@
         <div>
             <span class="inactive" id="artID"><%= art.ID_article %></span>
             <h1 class="font_w_n" id="artName"> <%= art.Name %> </h1>
-            <p class="color_g font_size_25 font_w_bold" id="artPrice"> $ <%= art.Price %> </p>
+            <p class="color_g font_size_25" id="artPrice"> $ <%= art.Price %> </p>
             <div class="d_flex flex_d_c">
-                <span>Vendedor: <a href="#"> <%= all_data.NameUser %> </a></span>
-                <label for=""> Cantidad </label>
-                <input type="number" value="1" min="1" max="9" class="input_number">
+                <span>Vendedor: <a href="/store/user/<%= all_data.ID_user %>" class="text_d_n font_w_bold color_n underline"> <%= all_data.NameUser %> </a></span>
+                <!-- <label for=""> Cantidad </label> -->
+                <!-- <input type="number" value="1" min="1" max="9" class="input_number"> -->
                 <button id="add-to-car" class="m_t_1 bg_color_g bttn"> Añadir al carrito </button>
                 <p > <%= art.Description %> </p>
             </div>

@@ -1,15 +1,9 @@
+const {PORT, DB_HOST, DB_NAME, DB_PORT, DB_PASSWORD, DB_USER} = require('./env');
 module.exports = {
     database: {
-        host: 'us-cdbr-east-06.cleardb.net',
-        database: 'heroku_73ba74a2877c65d',
-        user: 'b1156839c570b8',
-        password: 'dc33b942',
+        host: DB_HOST,
+        database: DB_NAME,
+        user: DB_USER,
+        password: DB_PASSWORD,
     },
-
-    databaseLocal: {
-        host: 'localhost',
-        database: 'example_db',
-        user: 'root',
-        password: ''
-    }
 };

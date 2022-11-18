@@ -32,15 +32,6 @@ route.get('/register/create-acount', (req, res) => {
     }
 });
 
-route.get('/profile', (req, res) => {
-    if (req.session.user) {
-        res.render('profile');
-    } else {
-        req.flash('message_error', 'Necesitas Iniciar Sesión');
-        res.redirect('/register/login');
-    }
-});
-
 route.get('/logout', (req, res) => {
     delete req.session.user;
     res.redirect('/register/login');

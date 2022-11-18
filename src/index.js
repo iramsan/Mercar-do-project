@@ -3,6 +3,7 @@ const path = require('path');
 const multer = require('multer');
 const session = require('express-session');
 const flash = require('connect-flash');
+const { PORT } = require('./env');
 
 // Initializations
 const app = express();
@@ -14,7 +15,7 @@ const storage = multer.diskStorage({
 });
 
 // Settings
-app.set('port', process.env.PORT || 3000);
+app.set('port', PORT);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
