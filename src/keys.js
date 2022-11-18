@@ -1,4 +1,4 @@
-const {PORT, DB_HOST, DB_NAME, DB_PORT, DB_PASSWORD, DB_USER} = require('./env');
+// const {PORT, DB_HOST, DB_NAME, DB_PORT, DB_PASSWORD, DB_USER} = require('./env');
 module.exports = {
     database: {
         host: DB_HOST,
