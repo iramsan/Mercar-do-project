@@ -17,16 +17,18 @@ function clickButton(e) {
     const item_id = document.getElementById('artID').textContent;
     const item_name = document.getElementById('artName').textContent;
     const item_price = document.getElementById('artPrice').textContent;
+    const item_image = document.getElementById('image_article').src;
 
-    add(createItem(item_id, item_name, item_price));
+    add(createItem(item_id, item_name, item_price, item_image));
     location.reload();
 }
 
-function createItem(id, name, price) {
+function createItem(id, name, price, image) {
     const item = {
         "id": id,
         "name": name,
-        "price": price
+        "price": price,
+        "image": image
     }
     return item
 }
@@ -57,7 +59,7 @@ if (localStorage.getItem('items') !== null) {
                 <td class="BordTable m_table">${acc}</td>
                 <td class="BordTable m_table">${i.name}</td>
                 <td class="BordTable m_table">${i.price}</td>
-                <td class="BordTable m_table"><Button class="delete_art cursor" id="${i.id}" onclick="del(this.id)">Eliminar</Button></td>
+                <td class="BordTable m_table"><Button class="delete_art h_color_r bg_color_delete cursor" id="${i.id}" onclick="del(this.id)">Eliminar</Button></td>
             </tr>
         `;
         tr.innerHTML = content;
@@ -87,3 +89,14 @@ document.getElementById('deleteCar').addEventListener('click', () => {
 document.getElementById('close').addEventListener('click', () => {
     document.getElementById('show-shoppin').classList.toggle('inactive');
 });
+
+
+// Check if the shopping car is empty
+const local_empty = JSON.parse(localStorage.getItem('items'));
+const bttns_empty = document.getElementById('bttns_empty');
+const div_message = document.getElementById('car_empty');
+
+if (local_empty.length !== 0 && local_empty !== null) {
+    div_message.classList.add('inactive');
+    bttns_empty.classList.remove('inactive');
+}

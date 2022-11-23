@@ -1,0 +1,43 @@
+# fly.toml file generated for marcar-do on 2022-11-18T11:21:30-05:00
+
+app = "marcar-do"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[env]
+  PORT = "8080"
+  DB_HOST = 'us-cdbr-east-06.cleardb.net'
+  DB_NAME = 'heroku_73ba74a2877c65d'
+  DB_USER = 'b1156839c570b8'
+  DB_PASSWORD = 'dc33b942'
+
+[experimental]
+  allowed_public_ports = []
+  auto_rollback = true
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"

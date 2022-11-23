@@ -1,4 +1,4 @@
-const { query } = require('express');
+const { query, json } = require('express');
 const express = require('express');
 const route = express.Router();
 const pool = require('../database');
@@ -77,23 +77,29 @@ route.post('/register/create-acount', async (req, res) => {
 // Session
 route.post('/register/login', async (req, res) => {
     const {Email, Password} = req.body;
-    const email = {Email};
-    const pass = {Password};
-    const query = await pool.query('SELECT * FROM users WHERE ?', [email]);
-    if (query.length !== 0) {
-        if (pass.Password == query[0]['Password']) {
-            req.flash('message_welcome', 'Bienvenido');
-            req.session.user = query[0];
-            res.redirect('/profile');
+    if (Email.length !== 0) {
+        const email = {Email};
+        const pass = {Password};
+        const query = await pool.query('SELECT * FROM users WHERE ?', [email]);
+        if (query.length !== 0) {
+            if (pass.Password == query[0]['Password']) {
+                req.flash('message_welcome', 'Bienvenido');
+                req.session.user = query[0];
+                res.redirect('/profile');
+            } else {
+                req.flash('message_error', 'Contraseña incorrecta');
+                res.redirect('/register/login');
+            }
         } else {
-            req.flash('message_error', 'Contraseña incorrecta');
+            req.flash('message_error', 'El usuario no existe');
             res.redirect('/register/login');
         }
     } else {
-        req.flash('message_error', 'El usuario no existe');
+        req.flash('message_error', 'Rellena los campos');
         res.redirect('/register/login');
     }
 });
+
 
 route.get('/sales/edit/:id', async (req, res) => {
     const { id } = req.params;
@@ -141,6 +147,11 @@ route.get('/profile', async (req, res) => {
 route.post('/store/user/:id', async (req, res) => {
     await pool.query('');
     res.redirect('/profile');
+});
+
+route.get('/process-pay', (req, res) => {
+    
+    res.render('pay');
 });
 
 module.exports = route;

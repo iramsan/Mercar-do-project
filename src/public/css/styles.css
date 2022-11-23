@@ -91,6 +91,12 @@ html, body {
     outline: none;
     border: none;
 }
+.bg_color_delete{
+    background-color: #d43343;
+}
+.bg_color_access{
+    background-color: #1dcd5b;
+}
 /* BG images */
 .bg_img_1{
     background-image: url('https://i.pinimg.com/originals/a0/3c/28/a03c287de73b901a88a7c8c6d63be2d5.jpg');
@@ -247,6 +253,9 @@ html, body {
 .grid_3{
     grid-template-columns: repeat(3, 1fr);
 }
+.grid_3_media{
+    grid-template-columns: repeat(1, 1fr);
+}
 .grid_max_300{
     grid-template-columns: repeat(1, 1fr);
 }
@@ -313,6 +322,17 @@ html, body {
 
 
 /* Complements */
+.box_item{
+    margin: 1rem 0;
+    border: 1px solid #ccc;
+    padding: 8px 8px;
+    border-radius: 5px;
+}
+.image_item{
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
 .message_settings{
     position: absolute;
     top: 10px;
@@ -581,8 +601,8 @@ html, body {
     padding: 4px 8px;
 }
 .delete_art{
-    background-color: #d43343;
-    padding: 6px 12px;
+    max-width: 300px;
+    padding: 8px 12px;
     margin: 4px 2px;
     color: var(--color-white);
     border: 1px solid transparent;
@@ -642,6 +662,9 @@ html, body {
 }
 
 /* Hovers */
+.line_under:hover{
+    text-decoration: underline;
+}
 .session:hover{
     color: var(--color-white);
     background-color: var(--color-default-hover);
@@ -677,8 +700,11 @@ html, body {
 .art_added:hover{
     background-color: #3a8856;
 }
-.delete_art:hover{
+.h_color_r:hover{
     background-color: #bb2d3b;
+}
+.h_color_g:hover{
+    background-color: #388f56;
 }
 .close:hover{
     transform: rotate(360deg);
@@ -778,9 +804,13 @@ input[type=number]::-webkit-inner-spin-button {
 
 /* Media */
 @media (min-width: 576px) {
+
 }
 
 @media (min-width: 768px) {
+    .grid_3_media{
+        grid-template-columns: repeat(3, 1fr);
+    }
     .grid_max_300{
         grid-template-columns: 300px 1fr;
     }

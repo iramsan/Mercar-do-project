@@ -1,0 +1,42 @@
+<%- include('./layouts/main.ejs') -%>
+<%- include('./partials/navigation.ejs') -%>
+
+<div class="container">
+    <div class="" id="xxxxx">
+
+        
+
+    </div>
+    <div class="d_flex flex_d_c j_c_c a_items_c">
+        <span id="total"></span>
+        <a href=""><button class="delete_art h_color_g bg_color_access">Procesar pago</button></a>
+    </div>
+</div>
+
+<%- include('./partials/footer.ejs') -%>
+
+<script>
+    const arr = JSON.parse(localStorage.getItem('items'));
+    if (arr.length !== 0) {
+        let sum = 0;
+        for (const i of arr.reverse()) {
+            console.log(i);
+            const div = document.createElement('div');
+            const content = `
+                <div class="box_item box_item d_grid grid_3_media a_items_c gap_1">
+                    <img class="image_item m_auto" src="${i.image}" alt="00">
+                    <a href="/store/article/${i.id}" class="text_a_c text_d_n line_under color_n"><h2 class="font_w_n m_auto">${i.name}</h2></a>
+                    <div class="d_flex j_c_c a_items_c">
+                        <h3 class="color_g m_auto">${i.price}</h3>
+                        <Button class="delete_art h_color_r bg_color_delete cursor" id="${i.id}" onclick="del(this.id)">Eliminar</Button>
+                    </div>
+                </div>
+            `;
+            div.innerHTML = content;
+            document.getElementById('xxxxx').append(div);
+            sum += JSON.parse(i.price.slice(1,i.price.length));            
+        }
+        document.getElementById('total').innerText = `Total: $${sum}`;
+    }
+
+</script>

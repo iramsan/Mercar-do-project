@@ -62,11 +62,24 @@
 
 <!-- Articles views shopping-car -->
 <div class="container view_shopping_car d_flex flex_d_c inactive" id="show-shoppin">
-    <h2 class="font_w_n">Carrito de compras</h2>
+    <div class="d_flex j_c_c a_items_c">
+        <h2 class="font_w_n">Carrito de compras</h2>
+        <img class="icon" src="/img/iconShoppingcar.png" alt="">
+    </div>
+    <!-- Message empty -->
+    <div class="m_auto p_1" id="car_empty">
+        <span class="font_size_25">No tienes ningun producto agregado</span>
+        <a href="/store" class="font_size_25 color_g text_d_n">agregar</a>
+    </div>
+    <!-- All articles here -->
     <div class="d_flex flex_d_c scrool">
         <table class="scrool" id="row"></table>
     </div>
-    <button type="reset" id="deleteCar" class="delete_art p_t_1 cursor">Borrar todo</button>
+    <!-- Buttons -->
+    <div class="m_auto inactive" id="bttns_empty">
+        <button type="reset" id="deleteCar" class="delete_art h_color_r bg_color_delete cursor">Borrar todo</button>
+        <a href="/process-pay"><button class="delete_art h_color_g bg_color_access">Ir a pagar</button></a>
+    </div>
     <img src="/img/iconClose.png" alt="" id="close" class="close icon cursor transition">
 </div>
 
