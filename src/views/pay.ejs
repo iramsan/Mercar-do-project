@@ -2,25 +2,32 @@
 <%- include('./partials/navigation.ejs') -%>
 
 <div class="container">
-    <div class="" id="xxxxx">
-
-        
-
+    <!-- Count $ -->
+    <div class="border_top_ccc d_flex flex_d_c">
+        <div class="d_flex gap_1 a_items_c j_c_r">
+            <div class="d_flex flex_d_c">
+                <h3 class="pm_n">Sub-Total</h3>
+                <span class="color_c" id="count_items"></span>
+            </div>
+            <div><span id="total" class="font_w_bold font_size_25"></span></div>
+            <a href="/process-pay/step-one" ><button class="delete_art h_color_g bg_color_access">Procesar pago</button></a>
+        </div>
     </div>
-    <div class="d_flex flex_d_c j_c_c a_items_c">
-        <span id="total"></span>
-        <a href=""><button class="delete_art h_color_g bg_color_access">Procesar pago</button></a>
-    </div>
+    <!-- Items added -->
+    <div class="" id="add_items"></div>
 </div>
 
-<%- include('./partials/footer.ejs') -%>
-
 <script>
-    const arr = JSON.parse(localStorage.getItem('items'));
+    const arr = JSON.parse(localStorage.getItem('items')) ? JSON.parse(localStorage.getItem('items')) : [];
+    if (arr.length == 0) {
+        location.replace('/store');
+    }
+    
+    document.getElementById('count_items').innerText = `${arr.length} Articulos`;
+    
     if (arr.length !== 0) {
         let sum = 0;
         for (const i of arr.reverse()) {
-            console.log(i);
             const div = document.createElement('div');
             const content = `
                 <div class="box_item box_item d_grid grid_3_media a_items_c gap_1">
@@ -33,10 +40,10 @@
                 </div>
             `;
             div.innerHTML = content;
-            document.getElementById('xxxxx').append(div);
+            document.getElementById('add_items').append(div);
             sum += JSON.parse(i.price.slice(1,i.price.length));            
         }
-        document.getElementById('total').innerText = `Total: $${sum}`;
+        document.getElementById('total').innerText = `$${sum}`;
     }
 
 </script>

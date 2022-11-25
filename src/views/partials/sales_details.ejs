@@ -1,0 +1,12 @@
+<%- include('../layouts/main.ejs') -%>
+<%- include('../partials/navigation.ejs') -%>
+
+<div class="container">
+    <h2>Articulos pendientes por entregar</h2>
+    <% for (const i of sales) { %>
+        <div class="d_flex">
+            <img src="/uploads/<%= i.Img %>" alt="" class="image_item">
+            <p>Comprado por: <%= i.Name %> </p>
+        </div>
+    <% } %>
+</div>

@@ -1,0 +1,203 @@
+<%- include('../layouts/main.ejs') -%>
+<%- include('./navigation.ejs') -%>
+<%- include('../layouts/messages.ejs') -%>
+<div class="container d_flex flex_d_c">
+    <!-- Resumer -->
+    <div class="bg_color_b color_w p_1 border-r d_grid grid_t_c a_items_c">
+        <div class="scrool-small" id="items-added"></div>
+        <div class="m_auto">
+            <h2 class="font_w_n m_0">Comprando</h2>
+            <span class="color_c" id="items-length"></span>
+            <div>
+                <span class="fa-sm fa-shak fa-solid fa-dollar-sign " style="color: rgb(46, 213, 104);"></span>
+                <span class="font_size_25" id="items-total"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment -->
+    <% if (errors.length !== 0) { %>
+        <span class="m_t_1 message_error m_auto text_a_c_1 w_100">Completa todos los campos</span>
+    <% } %>
+
+    <form action="/process-pay/step-one" method="post" class="d_grid grid_t_c">
+        <input type="text" class="hidden-off" id="Count_arr" name="Count_arr">
+        <input type="text" class="hidden-off" id="arr_ids_art" name="arr_ids">
+        <input type="text" class="hidden-off" id="arr_ids_seller" name="arr_sellers">
+
+        <div class="m_auto d_flex flex_d_c">
+            <h2 class="font_w_n text_a_c_1">¿Donde quieres recibir tu pedido?</h2>
+            <div class="pos_rel m_auto">
+                <input type="text" name="Direction" value="<%= Direction %>" id="direction-a" onfocus="active('id-location-a')" onblur="inact('id-location-a')" placeholder="Escribe tu dirección" class="input_text push_icon" autofocus>
+                <i id="id-location-a" class="fa-lg fa-solid fa-location-pin" style="color: #ccc;"></i>
+            </div>
+            <div class="pos_rel m_auto">
+                <input type="text" name="Street" value="<%= Street %>" id="direction-b" onfocus="active('id-location-b')" onblur="inact('id-location-b')" placeholder="Colonia (Núm Interior, Referencias)" class="input_text push_icon">
+                <i id="id-location-b" class="fa-lg fa-solid fa-location-arrow" style="color: #ccc;"></i>
+            </div>
+            <div class="pos_rel m_auto">
+                <input type="number" name="Postal_Code" value="<%= Postal_Code %>" id="direction-c" onfocus="active('id-location-c')" onblur="inact('id-location-c')" placeholder="Codigo postal" class="input_text push_icon">
+                <i id="id-location-c" class="fa-lg fa-solid fa-envelopes-bulk" style="color: #ccc;"></i>
+            </div>
+            <div class="pos_rel m_auto">
+                <input type="text" name="Reference" value="<%= Reference %>" onfocus="active('id-location-d')" onblur="inact('id-location-d')" placeholder="Nombre (Casa, Oficina, etc)" class="input_text push_icon">
+                <i id="id-location-d" class="fa-lg fa-solid fa-house" style="color: #ccc;"></i>
+            </div>
+            <div class="pos_rel m_auto">
+                <input type="text" name="Tell" value="<%= Tell %>" onfocus="active('id-location-d')" onblur="inact('id-location-d')" placeholder="Telefono (Prefijo Ej. +52)" class="input_text push_icon">
+                <i id="id-location-d" class="fa-lg fa-solid fa-phone" style="color: #ccc;"></i>
+            </div>
+            <span id="geolocation" class="m_auto input_text m_t_1 font_size_16 bg_color_b color_w border_none cursor text_a_c_1">Geolocalizar</span>
+        </div>
+        <!-- Process two -->
+        <div class="m_auto d_flex flex_d_c">
+            <h2 class="font_w_n text_a_c_1">Datos de targeta</h2>
+            <div class="pos_rel m_auto">
+                <input type="text" name="Credit_card" onfocus="active('id-credit-card')" onblur="inact('id-credit-card')" placeholder="Numero de targeta" class="input_text push_icon">
+                <i id="id-credit-card" class="fa-lg fa-solid fa-credit-card" style="color: #ccc;"></i>
+            </div>
+            <div class="pos_rel m_auto">
+                <input type="text" name="Credit_name"onfocus="active('id-credit-name')" onblur="inact('id-credit-name')" placeholder="Nombre del propietario" class="input_text push_icon">
+                <i id="id-credit-name" class="fa-lg fa-solid fa-user" style="color: #ccc;"></i>
+            </div>
+            <div class="d_flex gap_1">
+                <div class="pos_rel m_auto">
+                    <input type="text" list="monthslist" name="Credit_date" onfocus="active('id-credit-date')" onblur="inact('id-credit-date')" placeholder="00/00" class="input_text push_icon w_142">
+                    <i id="id-credit-date" class="fa-lg fa-solid fa-calendar-days" style="color: #ccc;"></i>
+                    <datalist id="monthslist">
+                        <option value="01/22"/>
+                        <option value="02/22"/>
+                        <option value="03/22"/>
+                        <option value="04/22"/>
+                        <option value="05/22"/>
+                        <option value="06/22"/>
+                        <option value="07/22"/>
+                        <option value="08/22"/>
+                        <option value="09/22"/>
+                        <option value="10/22"/>
+                        <option value="11/22"/>
+                        <option value="12/22"/>
+                        <option value="01/23"/>
+                        <option value="02/23"/>
+                        <option value="03/23"/>
+                        <option value="04/23"/>
+                        <option value="05/23"/>
+                        <option value="06/23"/>
+                        <option value="07/23"/>
+                        <option value="08/23"/>
+                        <option value="09/23"/>
+                        <option value="10/23"/>
+                        <option value="11/23"/>
+                        <option value="12/23"/>
+                        <option value="01/24"/>
+                        <option value="02/24"/>
+                        <option value="03/24"/>
+                        <option value="04/24"/>
+                        <option value="05/24"/>
+                        <option value="06/24"/>
+                        <option value="07/24"/>
+                        <option value="08/24"/>
+                        <option value="09/24"/>
+                        <option value="10/24"/>
+                        <option value="11/24"/>
+                        <option value="12/24"/>
+                        <option value="01/25"/>
+                        <option value="02/25"/>
+                        <option value="03/25"/>
+                        <option value="04/25"/>
+                        <option value="05/25"/>
+                        <option value="06/25"/>
+                        <option value="07/25"/>
+                        <option value="08/25"/>
+                        <option value="09/25"/>
+                        <option value="10/25"/>
+                        <option value="11/25"/>
+                        <option value="12/25"/>
+                    </datalist>
+                </div>
+                <div class="pos_rel m_auto">
+                    <input type="number" min="000" max="999" name="Credit_code" onfocus="active('id-credit-code')" onblur="inact('id-credit-code')" placeholder="CVC" class="input_text push_icon w_142">
+                    <i id="id-credit-code" class="fa-lg fa-solid fa-lock" style="color: #ccc;"></i>
+                </div>
+            </div>
+            <button type="submit" class="m_auto m_b_60 input_text m_t_1 bg_color_g color_w font_w_bold font_size_25 border_none cursor">Continuar</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+<script>
+    // LocationStorage
+    const list = JSON.parse(localStorage.getItem('items')) ? JSON.parse(localStorage.getItem('items')) : [];
+    if (list.length == 0) {
+        location.replace('/store');
+    }
+    document.getElementById('items-length').innerText = `${list.length} Articulos`;
+    if (list.length !== 0) {
+        let sum = 0;
+        let index = 0;
+        let arr = [];
+        let arr_sell = [];
+        for (const i of list.reverse()) {
+            const div = document.createElement('div');
+            const content = `
+                <div class="d_grid grid_t_c border_top a_items_c gap_1">
+                    <img class="image_item m_auto" src="${i.image}" alt="00">
+                    <a href="/store/article/${i.id}" class="color_w text_a_c text_d_n line_under color_n"><h2 class="font_w_n m_auto">${i.name}</h2></a>
+                </div>
+            `;
+            div.innerHTML = content;
+            document.getElementById('items-added').append(div);
+            sum += JSON.parse(i.price.slice(1,i.price.length));
+            index++;
+            arr.push({"id" : i.id});
+            arr_sell.push({"id" : i.id_seller});
+        }
+        document.getElementById('items-total').innerText = `${sum}`;
+        document.getElementById('Count_arr').value = index;
+        document.getElementById('arr_ids_art').value = JSON.stringify(arr);
+        document.getElementById('arr_ids_seller').value = JSON.stringify(arr_sell);
+    }
+
+    // Add class label i
+    function active(id_icon) {
+        document.getElementById(id_icon).classList.add('fa-bounce');
+    }
+    function inact(id_icon) {
+        document.getElementById(id_icon).classList.remove('fa-bounce');
+    }
+
+    // Geolocation
+    function onSucccess(position) {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+        const location = `${lat}, ${long}`;
+        document.getElementById('direction-a').value = location;
+    }
+    function onError() {
+        console.log("try again");
+    }
+    document.getElementById('geolocation').addEventListener('click', () =>{
+        navigator.geolocation.getCurrentPosition(onSucccess, onError);
+    });
+
+    const arr = JSON.parse(localStorage.getItem('items')) ? JSON.parse(localStorage.getItem('items')) : [];
+    if (arr.length == 0) {
+        location.replace('/store');
+    }
+
+    // if exist Shopping car
+    if (document.getElementById('shopping-car')) {
+        document.getElementById('shopping-car').style.display = 'none';
+    }
+
+    const ids_articles = document.getElementsByClassName('hidden-off');
+    if (ids_articles) {
+        for (const i of ids_articles) {
+            i.style.display = 'none';
+        }
+    }
+
+</script>

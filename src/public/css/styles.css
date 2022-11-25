@@ -43,7 +43,6 @@ html, body {
     z-index: 10;
 }
 
-
 /* Colors */
 .color_n{
     color: var(--color-black);
@@ -160,6 +159,9 @@ html, body {
 .font_w_bold{
     font-weight: bold;
 }
+.font_size_16{
+    font-size: 16px;
+}
 
 /* text */
 .text_d_n{
@@ -201,6 +203,9 @@ html, body {
 }
 .j_c_c{
     justify-content: center;
+}
+.j_c_r{
+    justify-content: right;
 }
 .a_items_c{
     align-items: center;
@@ -250,6 +255,9 @@ html, body {
 .grid_t_c_5{
     grid-template-columns: repeat(1, 1fr);
 }
+.grid_t_c_6{
+    grid-template-columns: repeat(1, 1fr);
+}
 .grid_3{
     grid-template-columns: repeat(3, 1fr);
 }
@@ -292,6 +300,10 @@ html, body {
     margin: 0.5rem 0;
 }
 /* Padding */
+.pm_n{
+    padding: 0;
+    margin: 0;
+}
 .p_0{
     padding: 1rem 0;
 }
@@ -322,6 +334,22 @@ html, body {
 
 
 /* Complements */
+.adjust{
+    position: fixed;
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+
+}
+.conf_delete{
+    margin: auto;
+    max-width: 550px;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    background-color: #35363a;
+}
 .box_item{
     margin: 1rem 0;
     border: 1px solid #ccc;
@@ -513,6 +541,9 @@ html, body {
     text-align: center;
 }
 
+.error{
+    border-color: #bb2d3b;
+}
 .message_error{
     background-color: #f8d7da;
     color: #9d1c24;
@@ -623,6 +654,9 @@ html, body {
     position: sticky;
     top: 100px;
 }
+.push_icon{
+    padding-left: 40px;
+}
 
 /* border */
 .border_none{
@@ -630,6 +664,9 @@ html, body {
 }
 .border_top{
     border-top: 1px solid var(--color-white);
+}
+.border_top_ccc{
+    border-top: 1px solid #ccc;
 }
 .border-r{
     border-radius: 5px;
@@ -647,6 +684,11 @@ html, body {
 }
 
 /* Scrool */
+.scrool-small{
+    overflow: scroll;
+    overflow-x: hidden;
+    max-height: 175px;
+}
 .scrool{
     overflow: scroll;
     overflow-x: hidden;
@@ -797,9 +839,17 @@ html, body {
 .cursor{
     cursor: pointer;
 }
+.w_142{
+    width: 142px;
+}
 /* Settings */
 input[type=number]::-webkit-inner-spin-button {
     opacity: 1;
+}
+i{
+    position: absolute;
+    left: 13px;
+    top: 27px;
 }
 
 /* Media */
@@ -836,7 +886,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 @media (min-width: 992px) {
     .m_b_60{
-        margin: 0;
+        margin-bottom: 0;
     }
     .d_none_desk{
         display: flex;

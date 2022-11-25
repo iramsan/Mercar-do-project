@@ -43,11 +43,23 @@
                     <span id="urlFile" class="scrool_only_x url_file_x">Vacio</span>
                 </div>
                 <div class="d_flex flex_d_c">
-                    <button type="submit" class="input_text m_t_1 bg_color_g color_w font_w_bold font_size_25 border_none cursor">Guardar cambios</button>
-                    <a href="/profile" class="input_text m_t_1 bg_color_r color_w font_w_bold font_size_25 border_none cursor text_d_n text_a_c_1">Cancelar</a>
+                    <button type="submit" class="h_color_g transition input_text m_t_1 bg_color_g color_w font_w_bold font_size_25 border_none cursor">Guardar cambios</button>
+                    <a href="#" id="delete_article" class="h_color_r transition input_text m_t_1 bg_color_r color_w font_w_bold font_size_25 border_none cursor text_d_n text_a_c_1" onclick="confirmDelete()">Eliminar</a>
+                    <a href="/profile" class="h_color_r transition input_text m_t_1 bg_color_r color_w font_w_bold font_size_25 border_none cursor text_d_n text_a_c_1">Cancelar</a>
                 </div>    
             </div>    
         </form>
+
+        <!-- Confirm delete -->
+        <div class="adjust inactive" id="conf_delete">
+            <div class="conf_delete">
+                <h3 class="font_w_n color_w">Estas a punto de eliminar este articulo. ¿Estas seguro?</h3>
+                <form action="/delete/article/<%= articleEdit.ID_article %>" method="post" class="d_flex j_c_c a_items_c">
+                    <button type="submit" class="font_size_16 delete_art h_color_g bg_color_access cursor">Confirmar</button>
+                    <span class="delete_art h_color_r bg_color_delete cursor" onclick="confirmDelete()">Cancelar</span>
+                </form>
+            </div>
+        </div>
 
         <!-- Views Settings -->
         <div class="d_flex flex_d_c">
@@ -134,6 +146,10 @@
     document.getElementById('putDiscount').addEventListener('click', () => {
         document.getElementById('disAdd').innerText = document.getElementById('putDiscount').value + '%';
     });
+
+    function confirmDelete() {
+        document.getElementById('conf_delete').classList.toggle('inactive');
+    }
 </script>
 
 <%- include('./partials/footer.ejs') -%>

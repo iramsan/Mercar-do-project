@@ -4,7 +4,7 @@
 <div class="container">
     <div class="d_grid grid_max_300 gap_1">
         <nav class="">
-            <div class="card_profile d_flex flex_d_c  pos_rel pos_stcky">
+            <div class="card_profile d_flex flex_d_c  pos_rel">
                 <div class="pos_abs position_icon_1 d_flex j_c_c a_items_c">
                     <span class="font_w_bold m_auto ball_icon"> <%= data_profile[0].NameUser[0].toUpperCase() %> </span>
                 </div>
@@ -28,6 +28,16 @@
                         <span class="m_auto font_w_bold font_size_25">0</span>
                         <span class="m_auto color_c">Likes</span>
                     </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="pos_rel">
+                   <a href="/sales/details" class="text_d_n color_n d_flex a_items_c">
+                        <h2 class="font_w_n">ventas</h2>
+                        <% if (sales.length !== 0) { %>
+                            <span class="fa-solid fa-bell fa-xl fa-shake" style="color: rgb(194, 12, 12);"></span>
+                        <% } %>
+                   </a>
                 </div>
             </div>
         </nav>

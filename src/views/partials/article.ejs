@@ -1,6 +1,6 @@
 <%- include('../layouts/main.ejs') -%>
 <%- include('./navigation.ejs') -%>
-
+<%- include('../layouts/messages.ejs') -%>
 <div class="container">
     <div class="d_grid grid_t_c_3 max_w_800 m_auto getThis">
         <div class="m_auto">
@@ -12,9 +12,12 @@
             <p class="color_g font_size_25" id="artPrice">$<%=art.Price%></p>
             <div class="d_flex flex_d_c">
                 <span>Vendedor: <a href="/store/user/<%= all_data.ID_user %>" class="text_d_n font_w_bold color_n underline"> <%= all_data.NameUser %> </a></span>
+                <span class="inactive" id="id_seller"><%= all_data.ID_user %></span>
                 <!-- <label for=""> Cantidad </label> -->
                 <!-- <input type="number" value="1" min="1" max="9" class="input_number"> -->
-                <button id="add-to-car" class="m_t_1 bg_color_g bttn"> Añadir al carrito </button>
+                <form action="/store/article/<%= art.ID_article %>" method="post">
+                    <button type="submit" id="add-to-car" class="m_t_1 bg_color_g bttn w_100"> Añadir al carrito </button>
+                </form>
                 <p > <%= art.Description %> </p>
             </div>
         </div>
